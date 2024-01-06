@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,15 +20,15 @@ public class day2part2 {
             File myObj = new File("day2\\data\\input");
             Scanner myReader = new Scanner(myObj);
 
-            int possibleGames = 0;
+            int powersAdded = 0;
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();                
                 // System.out.println(data);
-                possibleGames += parseLine(data);
+                powersAdded += parseLine(data);
                 
             }
             myReader.close();
-            System.out.println("possible games: " + possibleGames);
+            System.out.println("powersAdded: " + powersAdded);
         } catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
@@ -71,10 +72,15 @@ public class day2part2 {
         }
 
         // After parsing each line, check for the largest cubes for each game to determine the powers
-        
+        int pow = 1;
+
+        for (String color : cubes.keySet()) {
+            List<Integer> cc = cubes.get(color);
+            pow *= Collections.max(cc);
+        }
 
 
 
-        return gameId;
+        return pow;
     }
 }
