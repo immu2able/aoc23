@@ -12,7 +12,7 @@ public class day3part2 {
     public static void main(String[] args) {
 
         try {
-            File myObj = new File("day3\\data\\input");
+            File myObj = new File("day3\\data\\test-input");
             Scanner myReader = new Scanner(myObj);
 
             int lineNum = 0;
@@ -38,7 +38,7 @@ public class day3part2 {
         long accumulator = 0l;
         for (int i = 0; i < chars.length; i++) {
             StringBuilder sb = new StringBuilder();
-            String numbersString = "*0123456789";
+            String numbersString = "0123456789";
 
             boolean hasSymbolNeighbour = false;
             for (int j = 0; j < chars[i].length; j++) {
@@ -55,49 +55,49 @@ public class day3part2 {
                     }
                     if (j != chars[i].length - 1) {
                         char east = chars[i][j + 1];
-                        if (symbolsString.contains("" + east)) {
+                        if (numbersString.contains("" + east)) {
                             hasSymbolNeighbour = true;
                             continue;
                         }
                     }
                     if (i != chars.length - 1) {
                         char south = chars[i + 1][j];
-                        if (symbolsString.contains("" + south)) {
+                        if (numbersString.contains("" + south)) {
                             hasSymbolNeighbour = true;
                             continue;
                         }
                     }
                     if (i != 0) {
                         char north = chars[i - 1][j];
-                        if (symbolsString.contains("" + north)) {
+                        if (numbersString.contains("" + north)) {
                             hasSymbolNeighbour = true;
                             continue;
                         }
                     }
                     if ((i != 0) && (j != 0)) {
                         char northwest = chars[i - 1][j - 1];
-                        if (symbolsString.contains("" + northwest)) {
+                        if (numbersString.contains("" + northwest)) {
                             hasSymbolNeighbour = true;
                             continue;
                         }
                     }
                     if ((i != 0) && (j != chars[i].length - 1)) {
                         char northeast = chars[i - 1][j + 1];
-                        if (symbolsString.contains("" + northeast)) {
+                        if (numbersString.contains("" + northeast)) {
                             hasSymbolNeighbour = true;
                             continue;
                         }
                     }
                     if ((i != chars.length - 1) && (j != 0)) {
                         char southwest = chars[i + 1][j - 1];
-                        if (symbolsString.contains("" + southwest)) {
+                        if (numbersString.contains("" + southwest)) {
                             hasSymbolNeighbour = true;
                             continue;
                         }
                     }
                     if ((i != chars.length - 1) && (j != chars[i].length - 1)) {
                         char southeast = chars[i + 1][j + 1];
-                        if (symbolsString.contains("" + southeast)) {
+                        if (numbersString.contains("" + southeast)) {
                             hasSymbolNeighbour = true;
                             continue;
                         }
