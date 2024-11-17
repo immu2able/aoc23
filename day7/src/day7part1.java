@@ -4,6 +4,22 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
 
+enum HAND {
+    A("A", 14), K("K", 13), Q("Q", 12), J("J", 11), T("T", 10), NINE("9", 9), EIGHT("8", 8), SEVEN("7", 7), SIX("6", 6), FIVE("5", 5), FOUR("4", 4), THREE("3", 3), TWO("2", 2);
+
+    private String m_name;
+    private int m_value;
+
+    HAND(String name, int value) {
+        m_name = name;
+        m_value = value;
+    }
+
+    public int getValue() {
+        return this.m_value;
+    }
+}
+
 public class day7part1 {
 
     private static Map<String, Long> hands = new HashMap<>();
@@ -65,9 +81,13 @@ public class day7part1 {
         System.out.println("One Pair: " + onePair);
         System.out.println("High Card: " + highCard);
         
-
-        
-
+        fiveOfAKind = sort(fiveOfAKind);
+        sort(fourOfAKind);
+        sort(threeOfAKind);
+        sort(fullHouse);
+        sort(twoPair);
+        sort(onePair);
+        sort(highCard);
 
         values.putAll(fiveOfAKind);
         values.putAll(fourOfAKind);
@@ -81,6 +101,35 @@ public class day7part1 {
         Long tw= computeTotalWinings();
         System.out.println("Total Winings: " + tw);
          
+    }
+
+    private static HashMap<String, Long> sort(Map<String, Long> hands) {
+        HashMap<String, Long> sorted = new LinkedHashMap<>();
+        
+        
+        List<HAND> handList = new ArrayList<>();
+        for (Map.Entry<String, Long> entry : hands.entrySet()) {
+            handList.add(HAND.valueOf(entry.getKey()));
+        }
+
+        
+        Collections.sort(handList, new Comparator<HAND>() {
+            @Override
+            public int compare(HAND o1, HAND o2) {
+                return o2.getValue() - o1.getValue();
+            }
+        });
+
+        System.out.println("handlist: " + handList);
+
+        
+
+        for (Map.Entry<String, Long> entry : hands.entrySet()) {
+            sorted.put(entry.getKey(), entry.getValue());
+        }
+        System.out.println(sorted);
+
+        return sorted;
     }
 
     private static Long computeTotalWinings() {
